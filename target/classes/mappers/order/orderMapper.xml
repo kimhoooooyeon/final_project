@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.project.food.shop.order.ISOrderDAO">
+
+
+<select id="orderSearch" parameterType="com.spring.project.food.shop.order.OrderSearchDTO" resultType="com.spring.project.food.shop.order.OrderDTO">
+	SELECT * 
+	<choose>
+	<!-- member쪽 테이블관련 -->
+		<when test="kinds == 'name'">
+			<if test="searchData != null">
+				FROM p_order o, p_order_detail od, (SELECT member_num, name FROM p_member WHERE name=#{searchData}) m
+			</if>	
+		</when>
+		
+		<when test="kinds == 'member_id'">
+			<if test="searchData != null">
+				FROM p_order o, p_order_detail od, (SELECT member_num, name FROM p_member WHERE member_id=#{searchData}) m	
+			</if>	
+		</when>
+		
+		<when test="kinds == 'email'">
+			<if test="searchData != null">
+				FROM p_order o, p_order_detail od, (SELECT member_num, name FROM p_member WHERE email=#{searchData}) m
+			</if>	
+		</when>
+		
+		<when test="kinds == 'phone'">
+			<if test="searchData != null">
+				FROM p_order o, p_order_detail od, (SELECT member_num, name FROM p_member WHERE phone=#{searchData}) m
+			</if>	
+		</when>
+		<!-- order쪽 관련 -->
+		<when test="order_start_date != null">
+			FROM (SELECT * FROM p_order WHERE day=to_date(#{order_start_date},'yyyy-MM-dd') )o, p_order_detail od, (SELECT member_num, name FROM p_member) m
+		</when>
+		
+		<when test="order_progression != null">
+			FROM (SELECT * FROM p_order WHERE order_progression=#{order_progression} ) o, p_order_detail od, (SELECT member_num, name FROM p_member) m
+		</when>
+		
+		<!--  메뉴쪽 내용관련 -->
+		<when test="menu_name != null">
+			FROM p_order o, (SELECT * FROM p_order_detail WHERE order_name=#{menu_name}) od, p_member m	order_name=#{menu_name}
+		</when>
+		
+		<when test="category_num != null">
+			FROM p_order o, (SELECT * FROM p_order_detail WHERE menu_name=(SELECT menu_name FROM p_menu WHERE category_num=#{category_num}) od, (SELECT member_num, name FROM p_member) m
+		</when>
+	
+		<otherwise>
+			FROM p_order o, p_order_detail od, (SELECT member_num, name FROM p_member) m
+		</otherwise>
+		<!--  <when test="order != 'null'">
+			ORDER BY
+		</when-->	
+		
+	</choose>
+	WHERE o.order_num = od.order_num and o.member_num = m.member_num
+</select>
+
+<select id="categoryLoad" parameterType="Integer" resultType="com.spring.project.food.shop.menu.CategoryDTO">
+	SELECT *
+	FROM p_menu_category
+	WHERE shop_num = ${shop_num}
+</select>
+
+
+<update id="orderUpdate" parameterType="com.spring.project.food.shop.order.OrderDTO">
+	UPDATE p_order
+	SET progression=#{progression}
+	WHERE order_num=#{order_num}
+</update>
+
+</mapper>

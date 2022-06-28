@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.project.food.review.IReviewDAO">
+
+	<select id="reList" resultType="com.spring.project.food.review.ReviewDTO">
+		SELECT shop_num, COUNT(shop_num) as cnt FROM p_review  GROUP BY shop_num 
+	</select>
+	
+	<select id="valueList" resultType="com.spring.project.food.review.ReviewDTO">
+		SELECT shop_num, sum(evalute) as evalute from p_review Group By shop_num
+	</select>	
+	
+	 <select id="selList" resultType="com.spring.project.food.review.ReviewDTO">
+	    SELECT * FROM p_review,p_order, p_order_detail, p_member WHERE p_review.shop_num = p_order.shop_num 
+		AND p_order.shop_num = (SELECT shop_num as FROM p_shop WHERE shop_id=#{shop_id}) 
+		AND p_review.member_num = p_member.member_num
+	</select>
+	
+	<insert id="reviewRegist" parameterType="com.spring.project.food.review.ReviewDTO" >
+		INSERT INTO P_REVIEW VALUES(#{order_num}, #{shop_num}, #{member_num}, #{review_content}, #{evalute} ,#{upload_filename}, default)
+	</insert>
+	
+	<update id="reviewCheckUp" parameterType="com.spring.project.food.review.ReviewDTO">
+		UPDATE p_order SET review_check= 2 WHERE order_num=#{order_num}
+	</update> 	
+	
+
+</mapper>

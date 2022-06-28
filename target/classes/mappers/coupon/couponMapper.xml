@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.project.food.shop.coupon.ICouponDAO">
+
+<insert id="couponRegister" parameterType="com.spring.project.food.shop.coupon.CouponDTO">
+	INSERT INTO p_coupon 
+	VALUES(coupon_squence.NEXTVAL,#{member_num},#{shop_num},#{coupon_name},#{discountrate},#{expiration_date})
+</insert>
+
+<select id="categoryLoad" parameterType="Integer" resultType="com.spring.project.food.shop.coupon.CouponDTO">
+	
+	SELECT * 
+	FROM p_coupon 
+	WHERE shop_num=#{shop_num}
+	
+</select>
+
+<select id="couponList" parameterType="Integer" resultType="com.spring.project.food.shop.coupon.CouponDTO">
+
+	SELECT * 
+	FROM p_coupon
+	WHERE member_id=#{member_id}
+
+</select>
+
+<!-- <update id="couponUpdate" parameterType="com.spring.project.food.shop.coupon.CouponDto">
+	UPDATE p_coupon
+	SET coupon_name=#{coupon_name}, coupon_num=#{coupon_num}
+		, shop_id=#{shop_id}, discountrate=#{discountrate}, expiration_date=#{expiration_date}
+	WHERE member_id=#{member_id}
+</update> -->
+
+<delete id="couponDelete" parameterType="String">
+	DELETE FROM p_coupon	
+	WHERE member_id=#{member_id}
+
+</delete>
+
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.project.food.shop.IShopDAO">
+
+<insert id="insert" parameterType="com.spring.project.food.shop.ShopDTO">
+
+	INSERT INTO p_shop 
+	VALUES(
+	shop_ID_SEQ.NEXTVAL,#{shop_id},#{shop_pw},
+	#{owner_register_number},#{owner_name},#{owner_phone},#{owner_email},
+	#{shop_name},#{shop_tel},#{shop_zipcode},#{shop_address},#{shop_address_detail},
+	#{category_num},#{shop_logo}
+	)
+
+</insert>
+
+<select id="selectOne" parameterType="String" resultType="com.spring.project.food.shop.ShopDTO">
+
+	SELECT *
+	FROM p_shop
+	WHERE shop_id = #{shop_id}
+
+</select>
+
+<select id="selectPw" parameterType="String" resultType="String">
+
+	SELECT shop_pw
+	FROM p_shop
+	WHERE shop_id = #{shop_id}
+	
+</select>
+
+<select id="selectId" parameterType="String" resultType="Integer">
+
+	SELECT count(*)
+	FROM p_shop
+	WHERE shop_id=#{shop_id}
+	
+</select>
+
+<select id="selectOrn" parameterType="String" resultType="Integer">
+
+	SELECT count(*)
+	FROM p_shop
+	WHERE owner_register_number=#{owner_register_number}
+	
+</select>
+
+
+</mapper>

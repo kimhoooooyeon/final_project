@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.project.food.shop.menu.IMenuDAO">
+
+<insert id="menuInsert" parameterType="com.spring.project.food.shop.menu.MenuDTO">
+	INSERT INTO p_menu 
+	VALUES(menus_squence.NEXTVAL,#{shop_num},#{menu_name},#{menu_price},#{category_num},#{sale_rate},#{saling_check},
+	#{recommendation},#{menu_explanation},#{menu_filename})
+</insert>
+
+<select id="menuSearch" parameterType="com.spring.project.food.shop.menu.SearchDTO" resultType="com.spring.project.food.shop.menu.MenuDTO">
+	
+	SELECT * 
+	FROM p_menu 
+	WHERE shop_num=#{shop_num}
+	<choose>
+		<when test="kinds == 'menu_name'">
+			<if test="searchData != null">
+				AND menu_name=#{searchData}
+			</if>	
+		</when>
+		
+		<when test="kinds == 'menu_price'">
+			<if test="searchData != null">
+				AND menu_price=#{searchData}
+			</if>	
+		</when>
+		
+		<when test="sale_rate != 'choice'">
+			AND sale_rate=#{sale_rate}
+		</when>
+		
+		<when test="recommendation != 'choice'">
+			AND recommendation=#{recommendation}
+		</when>
+		
+		<when test="saling_check != 'choice'">
+			AND saling_check=#{saling_check}
+		</when>
+		
+		<when test="category_num != 'choice'">
+			AND category_num=#{category_num}
+		</when>
+	
+	</choose>
+	
+</select>
+
+<select id="categoryLoad" parameterType="String" resultType="com.spring.project.food.shop.menu.CategoryDTO">
+	SELECT *
+	FROM p_menu_category
+	WHERE shop_num = ${shop_num}
+</select>
+
+<select id="menuList" parameterType="Integer" resultType="com.spring.project.food.shop.menu.MenuDTO">
+
+	SELECT * 
+	FROM p_menu
+	WHERE shop_num=#{shop_num}
+
+</select>
+
+<update id="menuUpdate" parameterType="com.spring.project.food.shop.menu.MenuDTO">
+	UPDATE p_menu
+	SET menu_name=#{menu_name}, category_num=#{category_num}, menu_price=#{menu_price}
+		, saling_check=#{saling_check}, recommendation=#{recommendation}, menu_explanation=#{menu_explanation}
+		
+	WHERE menu_coder=#{menu_coder}
+</update>
+
+<delete id="menuDelete" parameterType="String">
+	DELETE FROM p_menu	
+	WHERE menu_coder=#{menu_coder}
+
+</delete>
+
+
+</mapper>

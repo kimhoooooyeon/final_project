@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.project.food.category.ICateDAO">
+
+
+	<select id="list" resultType="com.spring.project.food.shop.ShopDTO">
+		SELECT * FROM p_shop WHERE category_num = #{category_num}
+	</select> 
+	
+	
+	<select id="mList" resultType="com.spring.project.food.shop.menu.MenuDTO">
+		SELECT * from p_menu WHERE shop_num = (SELECT shop_num as FROM p_shop WHERE shop_id=#{shop_id})
+	</select>
+	
+	<select id="menuCate" resultType="com.spring.project.food.category.CategoryDTO">
+		SELECT * FROM p_menu_category WHERE shop_num = (SELECT shop_num as FROM p_shop WHERE shop_id=#{shop_id})
+	</select>
+
+
+	<select id="oList" resultType="com.spring.project.food.shop.menu.MenuDTO">
+		SELECT * from p_menu where shop_id = #{si} and menu_name = #{mn}
+	</select>
+
+</mapper>
