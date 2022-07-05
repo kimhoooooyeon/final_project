@@ -68,6 +68,11 @@ public class HomeController {
 		return "index4";
 	}
 	
+	@RequestMapping(value = "profile")
+	public String profile() {
+		return "profile";
+	}
+	
 
 
 	

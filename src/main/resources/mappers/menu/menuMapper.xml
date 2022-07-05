@@ -4,7 +4,7 @@
 
 <insert id="menuInsert" parameterType="com.spring.project.food.shop.menu.MenuDTO">
 	INSERT INTO p_menu 
-	VALUES(menus_squence.NEXTVAL,#{shop_num},#{menu_name},#{menu_price},#{category_num},#{sale_rate},#{saling_check},
+	VALUES(menu_coder_SEQ.NEXTVAL,#{shop_num},#{menu_name},#{menu_price},#{category_num},#{sale_rate},#{saling_check},
 	#{recommendation},#{menu_explanation},#{menu_filename})
 </insert>
 

@@ -3,7 +3,9 @@ package com.spring.project.food.review;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,18 +46,18 @@ public class ReviewController {
 	@RequestMapping(value = "/review")
 	public String sReview(Model model,String shop_id, String shop_name) {
 		ArrayList<ReviewDTO> sReview = reviewService.sReview(shop_id);
-	//	ArrayList<MemberDTO> member = memberService.selectId();
+	
+		
+		
 		model.addAttribute("shop_name", shop_name);
 		model.addAttribute("shop_id", shop_id);
-		System.out.println(sReview);
 		if(sReview != null)
 			model.addAttribute("sReview", sReview);
 		return "order/review";
 	}
 	
 	@RequestMapping(value = "/reviewRegister")
-	public String reviewRegister(OrderDTO order, Model model, String shop_name) {
-	System.out.println(order);		
+	public String reviewRegister(OrderDTO order, Model model, String shop_name) {		
 	model.addAttribute("shop_name", shop_name);
 	model.addAttribute("orderRe", order);
 		return "member/review_register";
@@ -89,7 +91,7 @@ public class ReviewController {
 	public String fileUpload(
 			@RequestParam("article_file") List<MultipartFile> multipartFile
 			, HttpServletRequest request, HttpSession session) {
-		
+		String sessionFileName = null;
 		String strResult = "{ \"result\":\"FAIL\" }";
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot;
@@ -100,7 +102,7 @@ public class ReviewController {
 				for(MultipartFile file:multipartFile) {
 					fileRoot = "C:/JAVAS/spring_workspace/final_project/src/main/webapp/resources/upLoadImg/";
 			
-					System.out.println("파일 " +fileRoot);
+					System.out.println("파일 경로 " +fileRoot);
 					
 					String originalFileName = file.getOriginalFilename();	//오리지날 파일명
 					String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
@@ -110,8 +112,8 @@ public class ReviewController {
 					try {
 						InputStream fileStream = file.getInputStream();
 						FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일 저장
-						session.setAttribute("savedFileName", savedFileName);
-						System.out.println(savedFileName);
+						System.out.println("저장 파일 이름 "+savedFileName);
+						sessionFileName += savedFileName;
 					} catch (Exception e) {
 						//파일삭제
 						FileUtils.deleteQuietly(targetFile);	//저장된 현재 파일 삭제
@@ -119,6 +121,8 @@ public class ReviewController {
 						break;
 					}
 				}
+				session.setAttribute("savedFileName", sessionFileName);
+				System.out.println("세션에 담은 파일이름 :" + sessionFileName);
 				strResult = "{ \"result\":\"OK\" }";
 			}
 			// 파일 아무것도 첨부 안했을때 탄다.(게시판일때, 업로드 없이 글을 등록하는경우)

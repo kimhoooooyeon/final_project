@@ -14,9 +14,6 @@ public class OrderService implements IOrderService {
 	public ArrayList<OrderDTO> hiList(String member_id) {
 		ArrayList<OrderDTO> hiList = orderDao.hiList(member_id);
 		
-		for(OrderDTO h: hiList) {
-			System.out.println(h);
-		}
 		return hiList;
 	}
 	@Override

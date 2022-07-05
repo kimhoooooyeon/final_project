@@ -64,10 +64,7 @@ public class CategoryController {
 		String shop_id = shop.getShop_id();
 		ArrayList<MenuDTO> mList = cateService.selectShop(shop_id);
 		ArrayList<CategoryDTO> cateList = cateService.selectCate(shop_id);
-	
-		for(MenuDTO r : mList ) {
-			System.out.println(r);
-		}
+
 		
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("mList", mList);

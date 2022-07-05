@@ -3,7 +3,6 @@ $(document).ready(function(){
     // 리뷰등록 버튼 누를시 리뷰등록에 필요한 값들 전송
    // 수정버튼 클릭시 데이터수정
    $('input[name=review]').on('click',function(){
-      alert('버튼클릭');
       
       var data={};
       // 체크된 체크박스 갯수만큼 값저장
@@ -23,10 +22,7 @@ $(document).ready(function(){
       data.menu_count = menu_count;
       
       
-      // 값 확인용 코드
-      alert('주문 : '+order_num
-      +'메뉴 : '+order_menu
-      +'수량 : '+menu_count);
+
          
       console.log(data);
       

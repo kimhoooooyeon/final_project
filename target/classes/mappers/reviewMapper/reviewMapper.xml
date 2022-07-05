@@ -7,7 +7,7 @@
 	</select>
 	
 	<select id="valueList" resultType="com.spring.project.food.review.ReviewDTO">
-		SELECT shop_num, sum(evalute) as evalute from p_review Group By shop_num
+		SELECT shop_num, avg(evalute) as evalute from p_review Group By shop_num
 	</select>	
 	
 	 <select id="selList" resultType="com.spring.project.food.review.ReviewDTO">
