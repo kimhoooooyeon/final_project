@@ -200,6 +200,9 @@ border: none;
 		  	</div>
 		   </c:forEach>
 		</div>
+		
+		
+		
 	<div class="cart">
 		<div class="lists">장바구니</div>
 		<form action="orderApplication" method="post" id="orderApp">
