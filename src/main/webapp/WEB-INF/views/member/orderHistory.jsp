@@ -103,7 +103,7 @@ border: 1px solid #DCDCDC;
 			</td>
 			<td class="tb_history_td">
 	    	    <label style="font-size: 24px; margin-left: 20px;">${his.shop_name}</label><label style="float: right; margin-right: 100px;">${his.progression }</label><br>
-	    	  <label style="font-size: 15px; margin-left: 20px;"> ${his.order_menu}${his.menu_count}개</label><br><br>
+	    	  <label style="font-size: 15px; margin-left: 20px;"> ${his.order_menu}</label><br><br>
 	    	    <label style="font-size: 15px; margin-left: 20px;" >요청사항 : ${his.request }</label><br>
 			</td>
 			<td class="tb_history_td">

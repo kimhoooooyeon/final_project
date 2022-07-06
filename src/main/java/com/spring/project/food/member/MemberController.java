@@ -129,19 +129,19 @@ public class MemberController {
 		int OrNumCheck = 0;
 		String OrMenu = "";
 		
-		for(OrderDTO r : hiList) {
-			String chday = r.getDay().substring(0, 10); 
-			r.setDay(chday);
-			
-			if(OrNumCheck == r.getOrder_num()) {
-				OrMenu += r.getOrder_menu();
-				System.out.println("if 안 : " + OrNumCheck);
-			}
-			
-			OrNumCheck = r.getOrder_num();
-			System.out.println("for문 종료 : " + OrNumCheck);
-			System.out.println("for문 종료 : " + OrMenu); 
-		}
+//		for(OrderDTO r : hiList) {
+//			String chday = r.getDay().substring(0, 10); 
+//			r.setDay(chday);
+//			
+//			if(OrNumCheck == r.getOrder_num()) {
+//				OrMenu += r.getOrder_menu();
+//				System.out.println("if 안 : " + OrNumCheck);
+//			}
+//			
+//			OrNumCheck = r.getOrder_num();
+//			System.out.println("for문 종료 : " + OrNumCheck);
+//			System.out.println("for문 종료 : " + OrMenu); 
+//		}
 		
 		model.addAttribute("hiList", hiList);
 		return "member/orderHistory";

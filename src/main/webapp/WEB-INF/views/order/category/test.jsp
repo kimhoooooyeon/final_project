@@ -68,7 +68,7 @@ margin: 10px 0 0 100px;
 			</c:forEach>
 			<c:forEach var="evl" items="${valueList }">
 				<c:if test="${evl.shop_num == db.shop_num}">
-				별점 (<c:out value="${evl.evalute}" />)<br>
+				별점 (<c:out value="${evl.evalute/2}" />)<br>
 				</c:if>
 				<br>
 			</c:forEach>

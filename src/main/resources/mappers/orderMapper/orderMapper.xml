@@ -3,10 +3,12 @@
 <mapper namespace="com.spring.project.food.order.OrderDAO">
 
 	<select id="hiList" resultType="com.spring.project.food.order.OrderDTO"> 
-	SELECT * FROM p_order o, p_order_detail od, p_shop s
-  	WHERE o.order_num= od.order_num and s.shop_num = 
-  	o.shop_num and s.shop_num=o.shop_num and o.member_num=
-  	(SELECT member_num as FROM p_member WHERE member_id=#{member_id})
+		SELECT po.order_num, po.member_num, po.shop_num, ps.shop_name, LISTAGG(order_menu, ',') WITHIN GROUP(ORDER BY order_menu) AS order_menu 
+		FROM  p_order_detail pod, p_order po, p_shop ps
+		WHERE po.order_num = pod.order_num 
+		AND po.shop_num = ps.shop_num 
+		AND po.member_num =  (SELECT member_num as FROM p_member WHERE member_id=#{member_id})
+		GROUP BY po.order_num, po.member_num,po.shop_num, ps.shop_name
 	</select>
 	
 	<insert id="insertOrder" parameterType="com.spring.project.food.order.OrderDTO">
