@@ -61,12 +61,9 @@ public class OrderController {
 	@Transactional
 	@RequestMapping("orderlist")
 	public String orderlist(HttpSession session,OrderDTO order, Model model,Cart CartList,OrderDetailDTO orderdetail ) {
-		System.out.println("결제");
-		System.out.println(order);
 		
 		  String or_menu[] = order.getMenu_name().split(",");
 		  String or_count[] = order.getMenu_count().split(",");
-		  System.out.println(or_menu.length);
 		  String order_menu = order.getMenu_name();
 		  
 		  order.setOrder_menu(order_menu);
@@ -74,7 +71,6 @@ public class OrderController {
 		  int totoal = order.getTotal_price() + order.getDelivery_cost();
 		  
 		  String count = order.getMenu_count();
-		  System.out.println(count);
 		
 		  String msg = orderService.orderSend(order);
 		  int orderN = orderService.selectOrernum();
@@ -88,16 +84,12 @@ public class OrderController {
 				  orderService.orderdetailSend(orderdetail);
 			  }
 			 
-			
-			
-			System.out.println("오더디테일까지 등록완");
 			  
 		  }
 		  ArrayList<OrderDetailDTO> detail = orderService.orderReturn(orderN);
 		  System.out.println(totoal);
 		  model.addAttribute("detail", detail);
 		  model.addAttribute("totoal", totoal);
-		  System.out.println(msg);
 		  session.removeAttribute("cartList");
 		 
 		return "/order/orderlist";
