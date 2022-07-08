@@ -58,6 +58,7 @@ public class OrderController {
 		return "/order/orderCheck";
 	}
 	
+	@Transactional
 	@RequestMapping("orderlist")
 	public String orderlist(HttpSession session,OrderDTO order, Model model,Cart CartList,OrderDetailDTO orderdetail ) {
 		System.out.println("결제");
