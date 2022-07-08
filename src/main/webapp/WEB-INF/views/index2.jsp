@@ -20,7 +20,7 @@
 	
 	<div id="map" style="width:750px;height:350px;"></div>
 
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7893324c959c5fd8cb71d14b81b36060&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey="발급키"&libraries=services"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
