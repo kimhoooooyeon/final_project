@@ -50,7 +50,7 @@ border-radius: 10%;
 <body>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7893324c959c5fd8cb71d14b81b36060&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey="발급키"&libraries=services"></script>
 <script>
 
 //주소-좌표 변환 객체를 생성합니다
