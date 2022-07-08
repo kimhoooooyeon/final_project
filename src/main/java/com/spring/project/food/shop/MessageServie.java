@@ -14,13 +14,13 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Service
 public class MessageServie {
 //	@Value("${coolsms.devHee.apikey}")
-	private String apiKey = "NCSDPWOT37DQOXNG";
+	private String apiKey = "";
 	
 //	@Value("${coolsms.devHee.apisecret}")
-	private String apiSecret="YWW5OL5NQFK2MCSCMIDZ3FYPMUUUMMAE";
+	private String apiSecret="";
 	
 //	@Value("${coolsms.devHee.fromnumber}")
-	private String fromNumber="010-9198-3628";
+	private String fromNumber="";
 
 	@Autowired public HttpSession session;
 	
