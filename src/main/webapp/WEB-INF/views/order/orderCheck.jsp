@@ -227,7 +227,7 @@ var ordertest;
   
 function iamport(){
 		//가맹점 식별코드
-		IMP.init('imp58963495');
+		IMP.init(''); //숨김
 		IMP.request_pay({
 		    pg : 'kakaopay',
 		    pay_method : 'card',
